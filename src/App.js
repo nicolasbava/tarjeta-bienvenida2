@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useState, useEffect } from "react";
+import Card from "./components/Card";
+
+import Form from './components/Form'
+
+import downloadjs from 'downloadjs';
+import html2canvas from 'html2canvas';
 
 function App() {
+
+
+
+  const handleCaptureClick = useCallback(async () => {
+
+    const canvas = await html2canvas(null);
+    const dataURL = canvas.toDataURL('image/png');
+
+    downloadjs(dataURL, 'card.png', 'image/png');
+
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+
+      CREAR TARJETA DE BIENVENIDA
+      <Form />
+      <Card />
+
+      
+
+      <button href="#" onClick={handleCaptureClick}>
+        Descargar
+      </button>
+
     </div>
   );
 }
 
 export default App;
+
+
+// definir un estado global
+// modificar ese estado global
+// escribir ese estado global
+// captura de pantalla
+// test
